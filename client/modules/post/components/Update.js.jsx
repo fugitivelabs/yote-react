@@ -33,6 +33,7 @@ export default class Update extends React.Component{
   }
 
   _onChange() {
+    console.log("UPDATE:  post changed");
     this.setState(getPostUpdateState());
   }
 

@@ -22,8 +22,8 @@ export default class List extends React.Component{
     super(props);
     this.state = getPostsListState();
     this._onChange = this._onChange.bind(this);
-    console.log("context:");
-    console.log(context);
+    // console.log("context:");
+    // console.log(context);
   }
 
   componentWillMount() {
@@ -40,6 +40,7 @@ export default class List extends React.Component{
   }
 
   _onChange() {
+    console.log("LIST:  post changed");
     this.setState(getPostsListState());
   }
 
