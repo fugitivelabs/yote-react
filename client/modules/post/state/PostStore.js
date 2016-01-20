@@ -1,9 +1,17 @@
 import AppDispatcher from "../../../dispatcher";
 import AppEventEmitter from "../../../AppEventEmitter";
 import PostConstants from "./PostConstants";
+import _ from "lodash";
 
 let _posts = [];
 let _post = {};
+
+
+let _addMorePosts = (newPosts, callback) => {
+  // something here handles pagination
+  _posts.push(newPosts);
+  callback();
+}
 
 let _template = { //should be immutable
   post: {
@@ -21,6 +29,9 @@ class PostEventEmitter extends AppEventEmitter {
     console.log("get single post called in store");
     return _post;
   }
+  checkForPost(postId) {
+    var _postIndex = _.findIndex(_posts, { _id: postId });
+    return _postIndex < 0 ? false : true;
   getBlankTemplate() {
     console.log("get blank post object in store");
     return _template;
