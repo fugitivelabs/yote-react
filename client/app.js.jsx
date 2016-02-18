@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 //state change logger
 const loggerMiddleware = createLogger();
 //routing stuff
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Router, browserHistory } from 'react-router'
 import { syncHistory } from 'react-router-redux'
 
 //our reducers
@@ -25,18 +25,13 @@ const store = createStore(
   )
 )
 
-import Layout from './global/components/Layout.js.jsx'
-import Landing from './global/components/Landing.js.jsx'
-//modules
-import postRoutes from './modules/post2/postRoutes'
+import routes from './global/routes'
+
 render(
   (
     <Provider store={store}>
       <Router history={browserHistory}>
-        <Route path="/" component={Layout}>
-          <IndexRoute component={Landing} />
-          {postRoutes}
-        </Route>
+        {routes}
       </Router>
     </Provider>
   )

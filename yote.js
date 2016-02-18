@@ -1,7 +1,7 @@
-/*  
+/*
 ••••••••••••••••••••••••••••••••••••••••••••••••••
 
-Welcome to Yote.  We hope you like it. 
+Welcome to Yote.  We hope you like it.
 
   - Fugitive Labs
 
@@ -68,9 +68,50 @@ app.use(session({
   //   secure: ((app.get('env') == 'production') ? true : false)
   // }
 }));
-// app.use(favicon(path.join(__dirname, 'public','favicon.ico'))); 
+// app.use(favicon(path.join(__dirname, 'public','favicon.ico')));
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+//IMPORT REDUX STUFF
+var webpack = require('webpack')
+  , config = require('./webpack.config')
+  , Provider = require('react-redux').Provider
+  , React = require('react')
+  , renderToString = require('react-dom/server').renderToString
+  , match = require('react-router').match
+  , RouterContext = require('react-router').RouterContext
+  , frontEndRoutes = require('./client/global/routes')
+  // , fetchComponentData from util
+  ;
+
+var renderFullPage = function(html, initialState) {
+  return "big ass string" + html;
+}
+
+//react redux server side rendering
+app.use(function(req, res) {
+  match({
+    routes
+    , location: req.url
+  }, function(err, redirectLocation, renderProps) {
+    if(err) {
+      res.send(500);
+    } else if(!renderProps) {
+      res.send(404);
+    } else {
+
+      var initialState = {
+        //define this to match
+        posts: {
+          list: {}
+          , single: {}
+        }
+      }
+    }
+  });
+});
+
 
 //allow file uploads
 app.use(multipart({}));
@@ -227,5 +268,3 @@ if(app.get('env') == 'production' && useHttps) {
   require('http').createServer(app).listen(config.port);
   logger.info('Yote is listening on port ' + config.port + '...');
 }
-
-
