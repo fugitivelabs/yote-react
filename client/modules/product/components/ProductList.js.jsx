@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 // import actions
-import * as listActions from '../actions/productListActions';
+// import * as listActions from '../actions/productListActions';
+import * as productActions from '../actions/productActions';
 
 // import components
 import ProductListItem from './ProductListItem.js.jsx';
@@ -17,7 +18,10 @@ class ProductList extends Base {
 
   componentWillMount() {
     console.log("list mounting");
-    this.props.dispatch(listActions.fetchList()).then(() => {
+    // this.props.dispatch(listActions.fetchList()).then(() => {
+    this.props.dispatch(productActions.loadProduct('56d4c3d253e49b7b956196ab')).then(() => {
+      console.log("PRODUCT");
+      console.log();
       // console.log(this.props);
     })
   }
@@ -60,11 +64,12 @@ ProductList.propTypes = {
 const mapStateToProps = (state) => {
   console.log("list state");
   console.log(state);
-  const { product } = state;
-  const list = product.list;
-  return {
-    list: list
-  }
+  const { products } = state;
+  // const list = product.list;
+  // return {
+  //   list: list
+  // }
+  return { products: products }
 }
 
 export default connect(
