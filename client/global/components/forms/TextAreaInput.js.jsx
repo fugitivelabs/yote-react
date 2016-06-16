@@ -28,6 +28,7 @@ class TextAreaInput extends Base {
         <label htmlFor={name}> {label} </label>
         <textarea
           type="text"
+          rows="4"
           name={name}
           placeholder={placeholder}
           onChange={this._handleInputChange}

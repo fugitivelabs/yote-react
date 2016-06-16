@@ -1,39 +1,23 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Base from './BaseComponent.js.jsx';
 import CloseWrapper from './helpers/CloseWrapper.js.jsx';
 import { Router, Route, Link } from 'react-router';
-
-class DropdownMenu extends Base {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    if(this.props.isOpen) {
-      return(
-        <ul className="dropMenu">
-          <li className="dropdown-header"> Hello,  </li>
-          <li><Link onClick={this.props._openDropdown} to="/posts"> Posts</Link></li>
-          <li><a href="#"> Admin </a></li>
-          <li role="separator" className="divider"><br/></li>
-          <li><a href="#">Logout</a></li>
-        </ul>
-      )
-    } else {
-      return null;
-    }
-  }
-}
+import { connect } from 'react-redux';
+import { singleActions as userSingleActions } from '../../modules/user/actions';
+import DropdownMenu from './DropdownMenu.js.jsx';
 
 
-export default class TopNav extends Base {
+class TopNav extends Base {
   constructor(props, context) {
     super(props);
+
     this.state = this.getState();
     this._bind(
       '_openDropdown'
       , '_closeDropdown'
     );
   }
+
 
   getState() {
     return {
@@ -55,6 +39,7 @@ export default class TopNav extends Base {
   }
 
   render() {
+    const { user } = this.props;
     return(
       <div className="topbar">
         <CloseWrapper
@@ -90,5 +75,14 @@ export default class TopNav extends Base {
       </div>
     )
   }
-
 }
+
+const mapStateToProps = (state) => {
+  // console.log("State");
+  //console.log(state);
+  return {
+    user: state.user.single.user
+  }
+}
+
+export default connect(mapStateToProps)(TopNav);
