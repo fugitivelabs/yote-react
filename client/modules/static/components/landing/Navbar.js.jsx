@@ -6,14 +6,15 @@ The navbar on the landing page is styled a little differently
 
 import React from 'react';
 import Base from '../../../../global/components/BaseComponent.js.jsx';
-import { Link } from 'react-router';
+import CloseWrapper from '../../../../global/components/helpers/CloseWrapper.js.jsx';
+import { Router, Route, Link } from 'react-router';
 import { connect } from 'react-redux';
 import DropdownMenu from '../../../../global/components/DropdownMenu.js.jsx';
 
 
 
 class Navbar extends Base {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
 
   this.state = this.getState();
@@ -38,10 +39,10 @@ _openDropdown(e) {
 }
 
 _closeDropdown() {
-  this.setState({
-    isOpen: false
-  });
-}
+    this.setState({
+      isOpen: false
+    });
+  }
 
   render() {
     const { user } = this.props;
@@ -62,6 +63,10 @@ _closeDropdown() {
 
     return (
       <div style={background} className="topbar landing-nav _fixed transparent">
+      <CloseWrapper
+          isOpen={this.state.isOpen}
+          closeAction={this._closeDropdown}
+        />
         <div className="titles">
           <Link to="/">
             <div className="nav-logo"> Yote
@@ -97,6 +102,7 @@ Navbar.propTypes = {
   , openDialog: React.PropTypes.func
 
 }
+
 const mapStateToProps = (state) => {
   // console.log("State");
   //console.log(state);
