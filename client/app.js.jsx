@@ -20,7 +20,7 @@ import routes from './routes.js.jsx';
 
 import configureStore from './configureStore';
 
-const store = configureStore();
+const store = configureStore(window.__INITIAL_STATE__ || null);
 const history = syncHistoryWithStore(browserHistory, store);
 
 render(

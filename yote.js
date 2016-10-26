@@ -30,6 +30,12 @@ var express         = require('express')
   , sass            = require('node-sass-middleware')
   ;
 
+//compile ES6 on server
+//todo: only in production
+require('babel-register')({
+  presets: ['es2015','react']
+});
+
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var app = express();
 var config = require('./server/config')[env];

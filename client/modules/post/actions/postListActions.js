@@ -5,6 +5,7 @@ LIST ACTIONS GO HERE
 *****/
 
 import fetch from 'isomorphic-fetch'
+import callAPI from '../../../global/util/api'
 
 export const REQUEST_POST_LIST = "REQUEST_POST_LIST"
 function requestPostList() {
@@ -29,11 +30,8 @@ function receivePostList(json) {
 export function fetchList() {
   return dispatch => {
     dispatch(requestPostList())
-    return fetch('/api/posts')
-      .then(response => response.json())
-      .then(json =>
-        dispatch(receivePostList(json))
-      )
+    return callAPI('/api/posts')
+      .then(json => dispatch(receivePostList(json)))
   }
 }
 

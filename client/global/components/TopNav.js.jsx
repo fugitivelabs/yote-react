@@ -23,11 +23,15 @@ export default class TopNav extends Base {
 
 
   componentWillMount() {
-    window.addEventListener('scroll', this._handleScroll);
+    if(global.window) {
+      window.addEventListener('scroll', this._handleScroll);
+    }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this._handleScroll);
+    if(global.window) {
+      window.removeEventListener('scroll', this._handleScroll);
+    }
   }
 
 

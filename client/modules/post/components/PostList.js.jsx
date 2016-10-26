@@ -65,6 +65,10 @@ PostList.propTypes = {
   dispatch: PropTypes.func.isRequired
 }
 
+PostList.need = [
+  () => { return listActions.fetchList() }
+];
+
 const mapStoreToProps = (store) => {
   return {
     list: store.post.list
