@@ -20,7 +20,6 @@ function list(state = {
   , featuredMap: {}
   , published: []
   , publishedMap: {}
-  , pagination: {}
   , pagination: {
     page: 1
     , per: 50
